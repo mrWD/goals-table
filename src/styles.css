@@ -1,0 +1,1469 @@
+/* ============ GoalsTable design system ============
+ *
+ * A planner, not a checklist app: the year is the unit, and the interface is built so the
+ * ratio of ticked to unticked is legible before any single row is read.
+ *
+ * Two layouts from one sheet. Under 900px the app is a phone — one column, navigation at
+ * the thumb. Over it the navigation moves to a rail and the content spreads, because this
+ * ships to desktop as an installable PWA and the twelve-month grid is worth the width: a
+ * quarter reads across a row, which is how it read in the spreadsheet.
+ */
+
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --ink: #14161a;
+  --ink2: #5c6470;
+  --ink3: #8b93a1;
+  --line: #e4e7ec;
+  --field: #f0f2f5;
+  --accent: #2f5fe0;
+  --on-accent: #ffffff;
+  --green: #17a34a;
+  --danger: #d92d20;
+  --track: #e7eaf0;
+
+  --cat-tech: #2f5fe0;
+  --cat-lang: #7c4dcc;
+  --cat-money: #17803d;
+  --cat-health: #b45309;
+  --cat-life: #0e7490;
+  --cat-project: #be1852;
+
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 4px 14px rgba(16, 24, 40, 0.05);
+  --radius: 14px;
+  --nav-h: 60px;
+  color-scheme: light dark;
+}
+
+/* The dark palette applies when the system asks for it, unless the user pinned light in
+   Profile, and always when the user pinned dark. The two selectors cannot be merged
+   because one of them lives inside a media query. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #101114;
+    --card: #1a1c21;
+    --ink: #eceef2;
+    --ink2: #a0a7b4;
+    --ink3: #737b89;
+    --line: #282b33;
+    --field: #23262d;
+    --accent: #7f9dff;
+    --on-accent: #10131c;
+    --green: #3ecf7a;
+    --danger: #ff6b63;
+    --track: #2a2e37;
+
+    --cat-tech: #7f9dff;
+    --cat-lang: #b795ff;
+    --cat-money: #4fd07f;
+    --cat-health: #f0a95c;
+    --cat-life: #4fc3d9;
+    --cat-project: #ff7fa5;
+
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #101114;
+  --card: #1a1c21;
+  --ink: #eceef2;
+  --ink2: #a0a7b4;
+  --ink3: #737b89;
+  --line: #282b33;
+  --field: #23262d;
+  --accent: #7f9dff;
+  --on-accent: #10131c;
+  --green: #3ecf7a;
+  --danger: #ff6b63;
+  --track: #2a2e37;
+
+  --cat-tech: #7f9dff;
+  --cat-lang: #b795ff;
+  --cat-money: #4fd07f;
+  --cat-health: #f0a95c;
+  --cat-life: #4fc3d9;
+  --cat-project: #ff7fa5;
+
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*
+ * 16px, not the body's 15px, and this is not a style choice.
+ *
+ * iOS zooms the page in when a focused field's text is smaller than 16px, and then leaves
+ * it zoomed — measured on the iPhone, typing anything threw the layout off. The other
+ * common fix, `maximum-scale=1` on the viewport, works by banning pinch-zoom for everyone,
+ * including people who need it. Making the text big enough costs nothing.
+ */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--field);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 9px 11px;
+  width: 100%;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ---------- shell ---------- */
+
+.app {
+  min-height: 100dvh;
+  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom));
+}
+
+.page {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.page-head {
+  padding-top: 6px;
+}
+
+.page-head h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+.page-sub {
+  margin: 6px 0 0;
+  color: var(--ink2);
+  font-size: 14px;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: var(--ink2);
+  font-size: 14px;
+}
+
+/* ---------- navigation ---------- */
+
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  height: calc(var(--nav-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-top: 1px solid var(--line);
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--ink3);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.nav-item.is-active {
+  color: var(--accent);
+}
+
+/* ---------- cards ---------- */
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.card-head.as-button {
+  width: 100%;
+  margin: 0;
+  text-align: start;
+}
+
+.card-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.card-note {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+/* ---------- today ---------- */
+
+.streak-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.streak-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.streak-count {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ink3);
+}
+
+.streak-count.is-live {
+  color: var(--cat-health);
+}
+
+.streak-count strong {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.streak-count span {
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+.streak-note {
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+.dots {
+  display: flex;
+  gap: 5px;
+}
+
+.day-dot {
+  flex: 1;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--track);
+}
+
+.day-dot.is-part {
+  background: color-mix(in srgb, var(--accent) 45%, var(--track));
+}
+
+.day-dot.is-full {
+  background: var(--accent);
+}
+
+.blocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border: 1.5px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.block-hours {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink3);
+}
+
+.block-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.block.is-done {
+  border-color: var(--green);
+  background: color-mix(in srgb, var(--green) 12%, var(--card));
+}
+
+.block.is-done .block-hours {
+  color: var(--green);
+}
+
+.focus-list {
+  margin: 0;
+  padding-inline-start: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.focus-meta,
+.month-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.slots {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px;
+}
+
+.slots li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 7px 9px;
+  border-radius: 9px;
+  background: var(--field);
+  font-size: 13px;
+}
+
+.slot-time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.slot-label {
+  color: var(--cat-health);
+  font-size: 12px;
+}
+
+/* ---------- goals ---------- */
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink2);
+}
+
+.group-head em {
+  margin-inline-start: auto;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink3);
+}
+
+.goals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.goal {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.goal-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.goal-title {
+  flex: 1;
+  text-align: start;
+  font-size: 15px;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.goal-title.as-text {
+  cursor: default;
+}
+
+.goal.is-done .goal-title {
+  color: var(--ink2);
+  text-decoration: line-through;
+  text-decoration-color: var(--ink3);
+}
+
+.goal-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 12px 12px;
+}
+
+.goal-editor-row {
+  display: flex;
+  gap: 8px;
+}
+
+.goal-editor-row label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--ink2);
+}
+
+.goal-editor-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* The tick. Sized to the 44px touch target with padding, not with its own box. */
+.check {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  border: 1.8px solid var(--track);
+  display: grid;
+  place-items: center;
+  color: var(--on-accent);
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.check.is-on {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.pill {
+  flex: none;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--c, var(--ink2));
+  background: color-mix(in srgb, var(--c, var(--ink3)) 14%, transparent);
+}
+
+.dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c, var(--ink3));
+}
+
+.cat-tech {
+  --c: var(--cat-tech);
+}
+.cat-lang {
+  --c: var(--cat-lang);
+}
+.cat-money {
+  --c: var(--cat-money);
+}
+.cat-health {
+  --c: var(--cat-health);
+}
+.cat-life {
+  --c: var(--cat-life);
+}
+.cat-project {
+  --c: var(--cat-project);
+}
+
+/* ---------- progress ring ---------- */
+
+.ring {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+.ring svg {
+  position: absolute;
+  inset: 0;
+}
+
+.ring-track {
+  stroke: var(--track);
+}
+
+.ring-value {
+  stroke: var(--accent);
+  transition: stroke-dashoffset 0.4s ease;
+}
+
+.ring-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.ring-text strong {
+  font-size: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.ring-text span {
+  font-size: 11px;
+  color: var(--ink2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- year summary ---------- */
+
+.year-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.year-legend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 3px 4px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--ink2);
+}
+
+.legend-row.is-active {
+  background: var(--field);
+  color: var(--ink);
+}
+
+.legend-name {
+  flex: none;
+  width: 68px;
+  text-align: start;
+}
+
+.legend-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.legend-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--c, var(--accent));
+}
+
+.legend-num {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink3);
+}
+
+.year-blurb {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+/* ---------- search, chips, add ---------- */
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  background: var(--field);
+  border-radius: 11px;
+  color: var(--ink3);
+}
+
+.search input {
+  background: none;
+  border: none;
+  padding: 10px 0;
+}
+
+.search input:focus-visible {
+  outline: none;
+}
+
+.search-clear {
+  font-size: 20px;
+  line-height: 1;
+  color: var(--ink3);
+  padding: 0 2px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink2);
+}
+
+.chip.is-active {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.inline-add {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn-quiet {
+  background: none;
+  box-shadow: none;
+  color: var(--ink2);
+}
+
+.btn-danger {
+  color: var(--danger);
+}
+
+.btn-primary.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---------- plan ---------- */
+
+.months {
+  display: grid;
+  gap: 10px;
+}
+
+.month {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 13px 14px;
+  border: 1.5px solid transparent;
+}
+
+.month.is-current {
+  border-color: var(--accent);
+}
+
+.month h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.month-short {
+  display: none;
+}
+
+.now {
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.month-edit {
+  margin-inline-start: auto;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.month-focus {
+  margin: 0;
+  padding-inline-start: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+}
+
+.month.is-editing {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.month.is-editing label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--ink2);
+}
+
+.month-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ---------- archive ---------- */
+
+.year-cards {
+  display: grid;
+  gap: 10px;
+}
+
+.year-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 14px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--ink3);
+}
+
+.year-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.year-card h2 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.year-card-sub {
+  margin: 1px 0 7px;
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+.year-card-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  background: var(--card);
+  border-radius: 11px;
+  box-shadow: var(--shadow);
+}
+
+.result-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.result-year {
+  flex: none;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink3);
+}
+
+.result-year.is-done {
+  color: var(--green);
+}
+
+/* ---------- profile ---------- */
+
+.stat-row {
+  display: flex;
+  gap: 10px;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 11px;
+  border-radius: 11px;
+  background: var(--field);
+}
+
+.stat strong {
+  font-size: 21px;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat span {
+  font-size: 12px;
+  color: var(--ink2);
+}
+
+.resources {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.resources li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-block: 5px;
+  padding-inline: 11px 8px;
+  border-radius: 999px;
+  background: var(--field);
+  font-size: 13px;
+}
+
+.resources button {
+  font-size: 16px;
+  line-height: 1;
+  color: var(--ink3);
+}
+
+/* ---------- other projects ---------- */
+
+.proj-filter {
+  margin-bottom: 12px;
+}
+
+.proj-group + .proj-group {
+  margin-top: 14px;
+}
+
+.proj-group-head {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+.projects {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.project {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 10px;
+  border-radius: 11px;
+  background: var(--field);
+}
+
+.project-icon {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.project-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.project-tagline {
+  font-size: 12px;
+  color: var(--ink2);
+  /* Taglines are one line: this is a link list, not a catalogue. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-status {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.proj-all {
+  margin: 14px 0 0;
+}
+
+.proj-all a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ---------- support ---------- */
+
+.support-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.support-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border-radius: 10px;
+  background: var(--field);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.support-link svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--accent);
+}
+
+.build {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink3);
+}
+
+/* ---------- empty, toast, sheet ---------- */
+
+.empty {
+  padding: 28px 16px;
+  text-align: center;
+}
+
+.empty-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.empty-hint {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px);
+  z-index: 40;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 11px 16px;
+  border-radius: 11px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 14px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+}
+
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(6, 8, 12, 0.45);
+}
+
+.sheet {
+  width: min(400px, 100%);
+  padding: 18px;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.sheet-msg {
+  margin: 0 0 16px;
+}
+
+.sheet-title {
+  margin: 0 0 14px;
+  font-size: 17px;
+}
+
+/* ---------- add a goal ----------
+ *
+ * The button floats clear of the list because the list is long: a year is seventy-odd rows,
+ * and an entry point that scrolls away with them is one nobody finds.
+ */
+
+.fab-spacer {
+  height: 56px;
+}
+
+.fab {
+  position: fixed;
+  inset-inline-end: 18px;
+  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 18px);
+  z-index: 25;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 4px 16px rgba(16, 24, 40, 0.24);
+}
+
+.fab:active {
+  transform: scale(0.94);
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-row {
+  display: flex;
+  gap: 8px;
+}
+
+.add-row label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--ink2);
+}
+
+/* ---------- month picker ---------- */
+
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.picker-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink2);
+}
+
+.picker-label em {
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink3);
+}
+
+.picker-options {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  /* Capped so a month card stays a card: the year can hold seventy goals, and the list
+     scrolls inside the editor rather than pushing Save off the screen. */
+  max-height: 210px;
+  overflow-y: auto;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--field);
+}
+
+.picker-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 9px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: start;
+  border: 1.5px solid transparent;
+}
+
+.picker-option.is-on {
+  background: var(--card);
+  border-color: var(--accent);
+}
+
+.picker-option-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-option-done {
+  flex: none;
+  font-size: 12px;
+  color: var(--green);
+}
+
+.picker-extras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* Entries that are not goals — the sheet had "Good fit, healthy feeling" — kept as chips
+   so they are visibly a different kind of thing from a picked goal. */
+.picker-extra {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: var(--field);
+  font-size: 12px;
+  color: var(--ink2);
+}
+
+.picker-custom {
+  display: flex;
+  gap: 6px;
+}
+
+.picker-custom input {
+  font-size: 16px;
+}
+
+/* ---------- add to today ---------- */
+
+.tabs {
+  margin-bottom: 12px;
+}
+
+.move-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.move-options {
+  max-height: 46dvh;
+}
+
+.move-bucket {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink3);
+}
+
+/* A checkbox that is a whole row, because "already done" is easy to miss as a small box
+   next to a field and it changes what the button does. */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 11px;
+  border-radius: 10px;
+  background: var(--field);
+  font-size: 14px;
+  text-align: start;
+}
+
+.toggle-row.is-on {
+  background: color-mix(in srgb, var(--green) 12%, var(--field));
+  color: var(--ink);
+}
+
+.toggle-row .check {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.sheet-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ---------- desktop ----------
+ *
+ * The rail replaces the bottom bar, and the twelve months become the four-by-three grid
+ * they were in the spreadsheet. Nothing is hidden at either size; only the arrangement
+ * changes.
+ */
+@media (min-width: 900px) {
+  .app {
+    display: grid;
+    grid-template-columns: 216px minmax(0, 1fr);
+    padding-bottom: 0;
+  }
+
+  /* The rail is placed explicitly because it comes *after* the page in the DOM — where it
+     belongs for reading order and for the phone layout. Auto-placement would put the page
+     in the 216px column and the navigation in the wide one. */
+  .nav {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    top: 0;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    height: 100dvh;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2px;
+    padding: 24px 12px;
+    border-top: none;
+    border-inline-end: 1px solid var(--line);
+    background: var(--card);
+    backdrop-filter: none;
+  }
+
+  .nav-item {
+    flex: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 11px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .nav-item.is-active {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+
+  .page {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: 1000px;
+    padding: 28px 32px 48px;
+    gap: 16px;
+  }
+
+  .page-head h1 {
+    font-size: 34px;
+  }
+
+  .months {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .month-short {
+    display: inline;
+  }
+
+  .month-full {
+    display: none;
+  }
+
+  .year-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .goals {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .toast {
+    inset-inline: auto 32px;
+    bottom: 24px;
+    transform: none;
+  }
+
+  /* No bottom bar to clear once the navigation is a rail. */
+  .fab {
+    inset-inline-end: 32px;
+    bottom: 84px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

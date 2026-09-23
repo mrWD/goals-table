@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="GoalsTable">
+  <!--
+    The progress ring, which is the app's own signature: it is on the Year screen and on
+    every card in the archive. Deliberately not a checklist or a tick — those are what every
+    other app in the category uses, and this one is about how much of a year is behind you.
+
+    One file feeds every platform: the browser tab, the PWA icons, the iOS marketing icon
+    and the Android launcher. See scripts/gen-icons.mjs and scripts/gen-ios-icon.mjs.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d70f7" />
+      <stop offset="1" stop-color="#1e45bd" />
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)" />
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="92" />
+  <!-- 70% of the way round, drawn from twelve o'clock like the ring in the app. -->
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#ffffff" stroke-width="92"
+    stroke-linecap="round" stroke-dasharray="1885" stroke-dashoffset="565"
+    transform="rotate(-90 512 512)" />
+</svg>
