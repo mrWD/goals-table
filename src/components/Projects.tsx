@@ -7,6 +7,7 @@ import {
   TYPE_KEY,
   type ProjectType,
 } from '../lib/projects'
+import { siteLink } from '../lib/from-app'
 import { useT } from '../store/lang'
 
 /**
@@ -65,7 +66,9 @@ export function Projects() {
               <ul className="projects">
                 {items.map((p) => (
                   <li key={p.name}>
-                    <a className="project" href={p.url} target="_blank" rel="noreferrer noopener">
+                    {/* Marked from the native app like every link to the author's sites;
+                        the two Chrome Web Store pages simply ignore the parameter. */}
+                    <a className="project" href={siteLink(p.url)} target="_blank" rel="noreferrer noopener">
                       {/* The tile takes the project's own accent, so a project looks the
                           same here as it does on the products page. */}
                       <span
@@ -90,7 +93,7 @@ export function Projects() {
           ))}
 
           <p className="card-note proj-all">
-            <a href={ALL_PRODUCTS_URL} target="_blank" rel="noreferrer noopener">
+            <a href={siteLink(ALL_PRODUCTS_URL)} target="_blank" rel="noreferrer noopener">
               {t('projects_all')}
             </a>
           </p>

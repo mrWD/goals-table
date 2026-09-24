@@ -4,6 +4,7 @@ import { SupportLinks } from '../components/Support'
 import { UI_LANGS, type LangCode } from '../i18n'
 import { applyBackup, exportBackup, exportCsv, isValidBackup } from '../lib/backup'
 import { number } from '../lib/format'
+import { donationsHidden } from '../lib/from-app'
 import { isYear } from '../lib/types'
 import { statsFor, useGoals } from '../store/goals'
 import { useLang, useLocale, useT, type LangChoice } from '../store/lang'
@@ -184,7 +185,8 @@ export default function ProfilePage() {
 
       <Projects />
 
-      <SupportLinks />
+      {/* App Store 3.1.1: no donation buttons inside the app — see lib/from-app. */}
+      {!donationsHidden() && <SupportLinks />}
 
       <p className="build">{t('profile_built', { time: __BUILD_TIME__ })}</p>
     </main>
