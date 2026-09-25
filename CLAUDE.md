@@ -122,15 +122,18 @@ here as well as the products page.
 
 GoalsTable is deliberately not in its own list.
 
-## Status (as of 2026-09-21)
+## Status (as of 2026-09-25)
 
 Built in one session on 2026-08-15. On that day both the web and native shells built,
 the Android debug APK compiled, and the iOS app ran on the simulator (iPhone 17 Pro,
 iOS 26.5).
 
-**iOS: open beta on TestFlight since 2026-08-29.** Build 1.0 (1) passed Beta App Review,
-and its public link is <https://testflight.apple.com/join/EbV3NMrK>. The build
-**expires on 2026-11-27**, so build 2 must be uploaded before then. `docs/STORE.md` has
+**iOS: open beta on TestFlight since 2026-08-29.** The current build is **1.0 (2)**,
+uploaded 2026-09-24 and approved for external testing; build 1 is still attached to the
+same group. The public link has not changed:
+<https://testflight.apple.com/join/EbV3NMrK>. Nobody has joined yet — 0 testers. Build 2
+**expires on 2026-12-23** (build 1 on 2026-11-27), and once the last one expires the
+link has nothing to install, so build 3 has to go up before that. `docs/STORE.md` has
 the App Store Connect ids and texts. It also records what went through the API and the
 one step only the web UI can do.
 
@@ -139,8 +142,8 @@ one step only the web UI can do.
 policy and the card on the index all live in the products-page repo
 (`mrWD/mrWD.github.io`, checked out at `../products-page`), not here.
 
-This is still **not a git repository**. The web version and the Android build are not
-published.
+The repository is **`mrWD/goals-table`**, working branch `main`. The web version and the
+Android build are not published.
 
 Open, if the owner wants them:
 

@@ -11,37 +11,39 @@ trackers' `docs/STORE.md`.
 | Bundle id | `com.mrwd.goalstable` |
 | Apple ID (ASC) | 6806621740 |
 | Team | 742H5JJX37 |
-| Version / build | 1.0 (1) |
+| Version / build | 1.0 (2) |
 | Category | Productivity |
 | Privacy policy | <https://mrwd.github.io/products/goals-table/privacy/> |
 | Support contact | lvigtor@gmail.com |
 
-## Current state (checked 2026-09-21)
+## Current state (checked 2026-09-25)
 
-Build **1.0 (1)** is in open testing: Beta App Review `APPROVED`, the external group
-*Open testing* has its public link on and the build attached —
-**https://testflight.apple.com/join/EbV3NMrK**. The join page reads "Join the
-GoalsTable beta". Nobody had joined yet: the group listed 0 testers.
+Build **1.0 (2)** is the one testers get: `processingState: VALID`,
+`externalBuildState: BETA_APPROVED`, its review submission `APPROVED`. Build 1 is still
+attached to the same group, so both are listed. The external group *Open testing* keeps
+its public link on — **https://testflight.apple.com/join/EbV3NMrK**, unchanged since
+build 1. Nobody has joined yet: the group lists 0 testers.
 
-The build is the current code. Its web bundle, unzipped from the `.ipa`, matches a
-fresh `NATIVE_SHELL=1` build file for file (36 of 36). The only differences are the
-embedded `__BUILD_TIME__` and the file-name hashes, which the comparison normalised.
+Build 2 is the current code. Its web bundle, unzipped from `build/ios/export/App.ipa`,
+matches a fresh `NATIVE_SHELL=1` build of a clean tree file for file (36 of 36). The
+only differences are the embedded `__BUILD_TIME__` and the file-name hashes, which the
+comparison normalised. Build 1 matched the same way when it was checked.
 
-**It expires on 2026-11-27.** TestFlight builds last 90 days. After that date the
-public link stays up but has nothing to install, so build 2 has to be uploaded and
-submitted before then.
+**Build 2 expires on 2026-12-23**, build 1 on 2026-11-27 — TestFlight builds last 90
+days. Once the last one expires the public link stays up with nothing to install, so
+build 3 has to be uploaded before that date.
 
 Checked through the API with `invest-table/scripts/asc.mjs`, which uses the same key.
 
 ## Build status
 
-The signed `.ipa` of build 1 is kept at the project root as
-`GoalsTable-1.0-build1.ipa`. The scratchpad it was exported to is gone. Release
-configuration, signed with *iOS Team Store Provisioning Profile:
-com.mrwd.goalstable*. `npm run build:native && npx cap sync ios`, then archive and
-export, reproduces it. A rebuild changes every file-name hash even when no source has
-changed, because `vite.config.ts` stamps `__BUILD_TIME__` into the bundle. Compare the
-contents, not the names.
+The signed `.ipa` of the current build is `build/ios/export/App.ipa`; build 1 is kept at
+the project root as `GoalsTable-1.0-build1.ipa`. Release configuration, signed with
+*iOS Team Store Provisioning Profile: com.mrwd.goalstable*.
+`npm run build:native && npx cap sync ios`, then archive and export, reproduces it. A
+rebuild changes every file-name hash even when no source has changed, because
+`vite.config.ts` stamps `__BUILD_TIME__` into the bundle. Compare the contents, not the
+names.
 
 Already done to make it uploadable:
 
@@ -52,7 +54,8 @@ Already done to make it uploadable:
 - the Capacitor frameworks ship their own `PrivacyInfo.xcprivacy`.
 
 **Every later upload needs a higher build number** — bump `CURRENT_PROJECT_VERSION`
-in the Xcode project; App Store Connect rejects a repeat of 1.
+in the Xcode project; App Store Connect rejects a repeat. It stands at 2, so the next
+one is 3.
 
 ## TestFlight — Test Information
 
@@ -112,6 +115,18 @@ Required before a build can go to *external* testers.
 Note for the next build: setting the privacy URL alone did not unblock the
 submission, and neither did the contact block alone — external testing wants both,
 and the 422 (`MISSING_REQUIRED_DATA`) never says which piece is missing.
+
+## Done on 2026-09-24
+
+- Build **1.0 (2)** uploaded, `CURRENT_PROJECT_VERSION` bumped to 2 (commit `7e2e391`).
+  It carries `16dd147`, which hides the Support section inside the native app.
+- Its "What's new" reads: *Build 2. The Support section is no longer shown inside the
+  app, and the links to the author's other projects open them without donation
+  buttons.*
+- Checked on 2026-09-25: `externalBuildState: BETA_APPROVED` and the review submission
+  `APPROVED`, but that submission carries no `submittedDate` — where build 1 waited
+  with a date on it, build 2 came back approved without one. The commit message says
+  "in Beta App Review", which is what was true when it was written.
 
 ## What only the owner can do
 
