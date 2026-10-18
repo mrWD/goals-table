@@ -109,6 +109,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: 'Bron toevoegen',
   profile_remove: '{name} verwijderen',
   profile_built: 'Gebouwd {time}',
+  profile_licenses: 'Opensourcelicenties',
+  profile_licenses_failed: 'De lijst met licenties kon niet worden geladen.',
 
   toast_added: 'Toegevoegd aan {bucket}',
   toast_moved: 'Toegevoegd aan {month}',

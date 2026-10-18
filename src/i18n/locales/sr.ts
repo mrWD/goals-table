@@ -110,6 +110,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: 'Додај извор',
   profile_remove: 'Уклони {name}',
   profile_built: 'Изградња {time}',
+  profile_licenses: 'Лиценце отвореног кода',
+  profile_licenses_failed: 'Списак лиценци није могуће учитати.',
 
   toast_added: 'Додато у {bucket}',
   toast_moved: 'Додато у {month}',

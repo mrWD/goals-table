@@ -38,6 +38,7 @@ dist-ssr
 
 # Build output and native artefacts
 build
+/public/licenses.txt
 .expo
 coverage
 .playwright-mcp

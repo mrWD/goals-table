@@ -58,7 +58,7 @@ rather than English.
   properties so the whole layout mirrors, rail included.
 
 Not translated, on purpose: goal titles, month focus text, the routine block labels
-(Prof / Langs / Others) and resource names — that is the owner's own data. Nor the ten
+and resource names — that is the user's own data. Nor the ten
 project taglines in "More from the author", which describe English-language products.
 
 ## Categories
@@ -103,19 +103,17 @@ signed `.dmg`/`.exe` is ever wanted, that is the piece to add.
 
 ## The data
 
-`src/lib/seed.ts` holds the spreadsheet as it stood on 2026-08-15: 306 goals across seven
-years plus the backlog, the twelve month plans, the daily blocks, the time slots and the
-resources list.
+`src/lib/seed.ts` is demo content, so that every screen has something on it at first
+launch: a fictional person's 306 goals across seven years plus the backlog, twelve month
+plans, the daily blocks, the time slots and a resources list. None of it is anyone's real
+plan.
 
 It is the **first run only**. Once anything is in device storage the seed is never read
-again, so editing it does not change an app that is already installed.
+again, so editing it does not change an app that is already installed — and deleting every
+goal leaves an empty app rather than bringing the demo back.
 
-Titles are verbatim, typos included ("Angluar", "Cloude", "Nederlanfish"). They are the
-owner's own record and his to correct in the app.
-
-One row was dropped: `Second Brain` appeared twice in the 2026 column, both ticked.
-Duplicates are collapsed within a year but never across years — `React *` in both 2020 and
-2021 is two separate facts.
+Duplicates are collapsed within a year but never across years: the same title in two
+years is two separate facts.
 
 ## Storage
 

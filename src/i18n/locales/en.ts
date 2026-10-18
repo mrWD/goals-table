@@ -5,9 +5,9 @@
  * forms keyed by the categories `Intl.PluralRules` returns for that language. Only `other`
  * is required; a language that needs `one`, `few` or `many` adds them.
  *
- * What is NOT here, on purpose: goal titles, month focus text, the routine block labels
- * (Prof / Langs / Others), resource names. Those are the owner's own data, seeded from his
- * spreadsheet and editable in the app — translating them would overwrite what he wrote.
+ * What is NOT here, on purpose: goal titles, month focus text, the routine block labels,
+ * resource names. Those are the user's own data — English demo content on first run, then
+ * whatever they write — and translating them would overwrite what they wrote.
  */
 
 export const STRINGS = {
@@ -119,6 +119,8 @@ export const STRINGS = {
   profile_add_resource: 'Add a resource',
   profile_remove: 'Remove {name}',
   profile_built: 'Built {time}',
+  profile_licenses: 'Open-source licences',
+  profile_licenses_failed: 'The list of licences could not be loaded.',
 
   toast_added: 'Added to {bucket}',
   toast_moved: 'Added to {month}',

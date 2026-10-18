@@ -106,6 +106,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: 'Kaynak ekle',
   profile_remove: '{name} kaldır',
   profile_built: 'Derleme {time}',
+  profile_licenses: 'Açık kaynak lisansları',
+  profile_licenses_failed: 'Lisans listesi yüklenemedi.',
 
   toast_added: '{bucket} listesine eklendi',
   toast_moved: '{month} ayına eklendi',

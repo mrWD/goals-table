@@ -109,6 +109,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: 'Aggiungi una risorsa',
   profile_remove: 'Rimuovi {name}',
   profile_built: 'Compilato {time}',
+  profile_licenses: 'Licenze open source',
+  profile_licenses_failed: 'Impossibile caricare l’elenco delle licenze.',
 
   toast_added: 'Aggiunto a {bucket}',
   toast_moved: 'Aggiunto a {month}',

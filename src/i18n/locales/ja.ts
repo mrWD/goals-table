@@ -106,6 +106,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: '学習先を追加',
   profile_remove: '{name}を削除',
   profile_built: 'ビルド {time}',
+  profile_licenses: 'オープンソースライセンス',
+  profile_licenses_failed: 'ライセンスの一覧を読み込めませんでした。',
 
   toast_added: '{bucket}に追加しました',
   toast_moved: '{month}に追加しました',

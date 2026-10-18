@@ -8,7 +8,7 @@ import { BACKLOG, type Bucket, type Category, type Goal, isYear } from '../lib/t
 
 interface GoalsState {
   goals: Record<string, Goal>
-  /** Set once the spreadsheet has been laid down, so an emptied year is not refilled. */
+  /** Set once the demo goals have been laid down, so an emptied year is not refilled. */
   seeded: boolean
 
   applySeed: () => void
@@ -39,7 +39,7 @@ export const useGoals = create<GoalsState>()(
       /**
        * First run only. Guarded on `seeded` rather than on the goals being empty, because
        * someone who deletes every goal on purpose should get an empty app, not the
-       * spreadsheet back.
+       * demo back.
        */
       applySeed: () =>
         set((s) => {
@@ -133,7 +133,7 @@ export const useGoals = create<GoalsState>()(
       storage: createJSONStorage(() => deviceStorage),
       partialize: (s) => ({ goals: s.goals, seeded: s.seeded }),
       onRehydrateStorage: () => (state) => {
-        // Nothing stored yet — this is the first launch, so the sheet goes in.
+        // Nothing stored yet — this is the first launch, so the demo goes in.
         if (state && !state.seeded) state.applySeed()
       },
     },

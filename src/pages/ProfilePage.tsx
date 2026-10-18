@@ -1,4 +1,5 @@
 import { useMemo, useRef } from 'react'
+import { Licenses } from '../components/Licenses'
 import { Projects } from '../components/Projects'
 import { SupportLinks } from '../components/Support'
 import { UI_LANGS, type LangCode } from '../i18n'
@@ -187,6 +188,8 @@ export default function ProfilePage() {
 
       {/* App Store 3.1.1: no donation buttons inside the app — see lib/from-app. */}
       {!donationsHidden() && <SupportLinks />}
+
+      <Licenses />
 
       <p className="build">{t('profile_built', { time: __BUILD_TIME__ })}</p>
     </main>

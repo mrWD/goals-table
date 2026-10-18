@@ -24,11 +24,14 @@ Vite, zustand with `persist`, `HashRouter`, Capacitor 8 shells.
    FilmTable, this app has no API to proxy.
 2. **The seed is first-run only.** `src/lib/seed.ts` is written once into an empty store
    and never consulted again. It is guarded on a `seeded` flag rather than on the store
-   being empty, so someone who deletes every goal gets an empty app, not the spreadsheet
-   back. Editing the seed does not change an installed app.
-3. **The owner's words are the owner's.** Titles are transcribed verbatim, typos included
-   ("Angluar", "Cloude Version", "Squads" for squats, "Nederlanfish"). They are his record
-   of seven years and his to correct in the app — do not "fix" them in the seed.
+   being empty, so someone who deletes every goal gets an empty app, not the demo back.
+   Editing the seed does not change an installed app.
+3. **The seed is fictional.** It ships to every installer and sits in a public repository,
+   so it holds a made-up person's goals — no real names, cities, employers, income, visas
+   or body measurements. Until 2026-10-18 it was the owner's own sheet, verbatim; that was
+   replaced on legal review, and the old version is still in git history. Keep its size and
+   category mix, so the archive looks lived-in, and word titles so `categorize` files them
+   right.
 4. **Its own visual identity.** Blue accent (`#2f5fe0`), distinct from FilmTable's purple.
    Six category colours that must stay distinguishable in both themes.
 
@@ -85,6 +88,10 @@ or the status bar.
 - **Verifying React through the console needs two calls.** Clicking and then reading state
   in one `javascript_exec` reads the DOM before React has flushed — it will happily "prove"
   that a toggle did nothing, or save a stale value. Split the click and the assertion.
+- **The licences are a generated file, shown in place.** `scripts/gen-licenses.mjs` writes
+  `public/licenses.txt` (gitignored) before every `dev` and `build`; Profile fetches it and
+  shows it in a card. Do not turn that into a plain link: in the native shell it navigates
+  the web view itself to a text file, and on iOS there is no back button to return.
 - **Inherited from the siblings** (documented there, not re-derived here): the native status
   bar follows the *system* theme, not the app's; the service worker must be destroyed in
   native builds or a new build keeps serving the old one.

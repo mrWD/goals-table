@@ -106,6 +106,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: 'Tambah sumber',
   profile_remove: 'Hapus {name}',
   profile_built: 'Dibangun {time}',
+  profile_licenses: 'Lisensi sumber terbuka',
+  profile_licenses_failed: 'Daftar lisensi tidak dapat dimuat.',
 
   toast_added: 'Ditambahkan ke {bucket}',
   toast_moved: 'Ditambahkan ke {month}',

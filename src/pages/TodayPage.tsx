@@ -90,7 +90,7 @@ export default function TodayPage() {
             aria-pressed={doneToday.includes(b.id)}
           >
             <span className="block-hours">{b.hours}h</span>
-            {/* Not translated: the labels are the owner's own, seeded from his sheet. */}
+            {/* Not translated: the labels are the user's own data, like goal titles. */}
             <span className="block-label">{b.label}</span>
           </button>
         ))}

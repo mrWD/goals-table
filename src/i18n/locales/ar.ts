@@ -120,6 +120,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: 'أضف مصدرًا',
   profile_remove: 'إزالة {name}',
   profile_built: 'بُني في {time}',
+  profile_licenses: 'تراخيص المصادر المفتوحة',
+  profile_licenses_failed: 'تعذّر تحميل قائمة التراخيص.',
 
   toast_added: 'أُضيف إلى {bucket}',
   toast_moved: 'أُضيف إلى {month}',

@@ -105,6 +105,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: '添加资源',
   profile_remove: '移除{name}',
   profile_built: '构建于 {time}',
+  profile_licenses: '开源许可',
+  profile_licenses_failed: '无法加载许可列表。',
 
   toast_added: '已添加到{bucket}',
   toast_moved: '已添加到{month}',

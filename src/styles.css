@@ -1104,6 +1104,34 @@ textarea {
   color: var(--accent);
 }
 
+/* ---------- licences ---------- */
+
+.licenses-chevron {
+  display: inline-flex;
+  color: var(--ink3);
+  transform: rotate(90deg);
+}
+
+.licenses-note {
+  margin: 10px 0 0;
+}
+
+/* Wrapped rather than scrolled sideways: a licence line is prose, and a horizontal
+   scrollbar inside a card is the one thing the 375px check exists to catch. */
+.licenses-text {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  max-block-size: 60vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  background: var(--field);
+  color: var(--ink2);
+  font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+
 .build {
   margin: 4px 0 0;
   text-align: center;

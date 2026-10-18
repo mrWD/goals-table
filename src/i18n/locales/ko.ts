@@ -106,6 +106,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: '자료 추가',
   profile_remove: '{name} 제거',
   profile_built: '빌드 {time}',
+  profile_licenses: '오픈 소스 라이선스',
+  profile_licenses_failed: '라이선스 목록을 불러오지 못했습니다.',
 
   toast_added: '{bucket}에 추가했습니다',
   toast_moved: '{month}에 추가했습니다',

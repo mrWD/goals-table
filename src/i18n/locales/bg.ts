@@ -109,6 +109,8 @@ const STRINGS: LocaleStrings = {
   profile_add_resource: 'Добави ресурс',
   profile_remove: 'Премахни {name}',
   profile_built: 'Компилация {time}',
+  profile_licenses: 'Лицензи с отворен код',
+  profile_licenses_failed: 'Списъкът с лицензи не можа да се зареди.',
 
   toast_added: 'Добавено в {bucket}',
   toast_moved: 'Добавено в {month}',

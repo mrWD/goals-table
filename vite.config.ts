@@ -27,7 +27,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       selfDestroying: NATIVE_SHELL,
-      includeAssets: ['favicon.svg', 'icons/*.png'],
+      // licenses.txt is written by scripts/gen-licenses.mjs before every build; listed here
+      // so the web build precaches it and Profile can show it offline.
+      includeAssets: ['favicon.svg', 'icons/*.png', 'licenses.txt'],
       manifest: {
         name: 'GoalsTable',
         short_name: 'GoalsTable',
