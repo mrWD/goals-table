@@ -98,7 +98,7 @@ const STRINGS: LocaleStrings = {
   lang_system: 'Sistem',
   profile_data: 'Datamu',
   profile_data_note:
-    'Semuanya ada di perangkat ini. Tidak ada akun dan tidak ada server — berkas cadangan adalah satu-satunya cara datanya sampai ke ponsel lain.',
+    'Tujuanmu hanya ada di perangkat ini. Tidak ada akun dan tidak ada salinan di cloud — berkas cadangan adalah satu-satunya cara tujuanmu sampai ke ponsel lain.',
   profile_export: 'Ekspor cadangan',
   profile_export_csv: 'Ekspor CSV',
   profile_import: 'Impor cadangan',
@@ -108,6 +108,13 @@ const STRINGS: LocaleStrings = {
   profile_built: 'Dibangun {time}',
   profile_licenses: 'Lisensi sumber terbuka',
   profile_licenses_failed: 'Daftar lisensi tidak dapat dimuat.',
+  metrics_title: 'Bagikan statistik penggunaan anonim',
+  metrics_note:
+    'Sekali sehari: layar dan fitur mana yang dipakai, versi aplikasi, platform, dan bahasa. Tanpa ID, judul, atau apa pun yang kamu ketik.',
+  metrics_on: 'Aktif',
+  metrics_off: 'Nonaktif',
+  metrics_notice:
+    'GoalsTable mengirim hitungan penggunaan anonim sekali sehari — tanpa ID, tanpa apa pun yang kamu ketik. Kamu bisa mematikannya di Profil.',
 
   toast_added: 'Ditambahkan ke {bucket}',
   toast_moved: 'Ditambahkan ke {month}',
@@ -131,8 +138,7 @@ const STRINGS: LocaleStrings = {
   status_open_source: 'Sumber terbuka',
 
   support_title: 'Dukungan',
-  support_note:
-    'GoalsTable gratis, tanpa iklan, dan tidak mengumpulkan apa pun. Kalau berguna bagimu, kamu bisa mendukungnya:',
+  support_note: 'GoalsTable gratis dan tanpa iklan. Kalau berguna bagimu, kamu bisa mendukungnya:',
 }
 
 export default STRINGS

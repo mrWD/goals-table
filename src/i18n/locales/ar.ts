@@ -112,7 +112,7 @@ const STRINGS: LocaleStrings = {
   lang_system: 'النظام',
   profile_data: 'بياناتك',
   profile_data_note:
-    'كل شيء يبقى على هذا الجهاز. لا يوجد حساب ولا خادم — ملف النسخة الاحتياطية هو الطريقة الوحيدة لنقلها إلى هاتف آخر.',
+    'أهدافك موجودة على هذا الجهاز فقط. لا يوجد حساب ولا نسخة سحابية — ملف النسخة الاحتياطية هو الطريقة الوحيدة لنقلها إلى هاتف آخر.',
   profile_export: 'تصدير نسخة احتياطية',
   profile_export_csv: 'تصدير CSV',
   profile_import: 'استيراد نسخة احتياطية',
@@ -122,6 +122,13 @@ const STRINGS: LocaleStrings = {
   profile_built: 'بُني في {time}',
   profile_licenses: 'تراخيص المصادر المفتوحة',
   profile_licenses_failed: 'تعذّر تحميل قائمة التراخيص.',
+  metrics_title: 'مشاركة إحصاءات استخدام مجهولة',
+  metrics_note:
+    'مرة في اليوم: الشاشات والميزات التي استُخدمت، وإصدار التطبيق والمنصة واللغة. بلا معرّفات ولا عناوين ولا أي شيء تكتبه.',
+  metrics_on: 'تشغيل',
+  metrics_off: 'إيقاف',
+  metrics_notice:
+    'يرسل GoalsTable أعدادًا مجهولة عن الاستخدام مرة في اليوم — بلا معرّفات ولا شيء مما تكتبه. يمكنك إيقاف ذلك من «الملف».',
 
   toast_added: 'أُضيف إلى {bucket}',
   toast_moved: 'أُضيف إلى {month}',
@@ -145,7 +152,7 @@ const STRINGS: LocaleStrings = {
   status_open_source: 'مفتوح المصدر',
 
   support_title: 'الدعم',
-  support_note: 'GoalsTable مجاني، بلا إعلانات ولا يجمع أي شيء. إذا كان مفيدًا لك، يمكنك دعمه:',
+  support_note: 'GoalsTable مجاني وبلا إعلانات. إذا كان مفيدًا لك، يمكنك دعمه:',
 }
 
 export default STRINGS

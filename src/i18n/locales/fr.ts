@@ -101,7 +101,7 @@ const STRINGS: LocaleStrings = {
   lang_system: 'Système',
   profile_data: 'Vos données',
   profile_data_note:
-    "Tout reste sur cet appareil. Il n'y a ni compte ni serveur — un fichier de sauvegarde est le seul moyen d'aller sur un autre téléphone.",
+    "Vos objectifs restent sur cet appareil. Il n'y a ni compte ni copie dans le cloud — un fichier de sauvegarde est le seul moyen de les mettre sur un autre téléphone.",
   profile_export: 'Exporter la sauvegarde',
   profile_export_csv: 'Exporter en CSV',
   profile_import: 'Importer une sauvegarde',
@@ -111,6 +111,13 @@ const STRINGS: LocaleStrings = {
   profile_built: 'Compilé {time}',
   profile_licenses: 'Licences open source',
   profile_licenses_failed: 'Impossible de charger la liste des licences.',
+  metrics_title: "Partager des statistiques d'utilisation anonymes",
+  metrics_note:
+    "Une fois par jour : les écrans et fonctions utilisés, la version de l'app, la plateforme et la langue. Aucun identifiant, aucun titre, rien de ce que vous tapez.",
+  metrics_on: 'Activé',
+  metrics_off: 'Désactivé',
+  metrics_notice:
+    "GoalsTable envoie une fois par jour des comptages d'utilisation anonymes — aucun identifiant, rien de ce que vous tapez. Vous pouvez le désactiver dans Profil.",
 
   toast_added: 'Ajouté à {bucket}',
   toast_moved: 'Ajouté à {month}',
@@ -135,7 +142,7 @@ const STRINGS: LocaleStrings = {
 
   support_title: 'Soutenir',
   support_note:
-    "GoalsTable est gratuit, sans publicité et ne collecte rien. S'il vous est utile, vous pouvez le soutenir :",
+    "GoalsTable est gratuit et sans publicité. S'il vous est utile, vous pouvez le soutenir :",
 }
 
 export default STRINGS

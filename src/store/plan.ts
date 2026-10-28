@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
+import { count } from '../lib/metrics'
 import { successFeedback, tapFeedback } from '../lib/native-ui'
 import { PLAN_YEAR, SEED_BLOCKS, SEED_MONTHS, SEED_RESOURCES, SEED_SLOTS } from '../lib/seed'
 import { deviceStorage } from '../lib/storage'
@@ -77,6 +78,7 @@ export const usePlan = create<PlanState>()(
           const closedTheDay = next.length === s.blocks.length && next.length > current.length
           if (closedTheDay) successFeedback()
           else tapFeedback()
+          count('block_toggled')
 
           const log = { ...s.log }
           // An empty array would keep the date in storage forever and make the log grow by
@@ -90,6 +92,7 @@ export const usePlan = create<PlanState>()(
         set((s) => {
           const clean = name.trim()
           if (!clean || s.resources.includes(clean)) return s
+          count('resource_added')
           return { resources: [...s.resources, clean] }
         }),
 

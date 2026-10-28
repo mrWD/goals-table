@@ -98,7 +98,7 @@ const STRINGS: LocaleStrings = {
   lang_system: 'Sistem',
   profile_data: 'Verilerin',
   profile_data_note:
-    'Her şey bu cihazda kalır. Hesap da sunucu da yok — verilerin başka bir telefona gitmesinin tek yolu yedek dosyası.',
+    'Hedeflerin yalnızca bu cihazda. Hesap da bulut kopyası da yok — hedeflerinin başka bir telefona gitmesinin tek yolu yedek dosyası.',
   profile_export: 'Yedeği dışa aktar',
   profile_export_csv: "CSV'yi dışa aktar",
   profile_import: 'Yedeği içe aktar',
@@ -108,6 +108,13 @@ const STRINGS: LocaleStrings = {
   profile_built: 'Derleme {time}',
   profile_licenses: 'Açık kaynak lisansları',
   profile_licenses_failed: 'Lisans listesi yüklenemedi.',
+  metrics_title: 'Anonim kullanım istatistiklerini paylaş',
+  metrics_note:
+    'Günde bir kez: hangi ekranların ve özelliklerin kullanıldığı, uygulama sürümü, platform ve dil. Kimlik, başlık ya da yazdığın hiçbir şey yok.',
+  metrics_on: 'Açık',
+  metrics_off: 'Kapalı',
+  metrics_notice:
+    'GoalsTable günde bir kez anonim kullanım sayıları gönderir — kimlik yok, yazdığın hiçbir şey yok. Bunu Profil’den kapatabilirsin.',
 
   toast_added: '{bucket} listesine eklendi',
   toast_moved: '{month} ayına eklendi',
@@ -131,8 +138,7 @@ const STRINGS: LocaleStrings = {
   status_open_source: 'Açık kaynak',
 
   support_title: 'Destek',
-  support_note:
-    'GoalsTable ücretsizdir, reklam içermez ve hiçbir şey toplamaz. İşine yarıyorsa destek olabilirsin:',
+  support_note: 'GoalsTable ücretsizdir ve reklam içermez. İşine yarıyorsa destek olabilirsin:',
 }
 
 export default STRINGS

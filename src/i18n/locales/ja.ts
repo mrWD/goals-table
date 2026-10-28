@@ -97,8 +97,7 @@ const STRINGS: LocaleStrings = {
   profile_language: '言語',
   lang_system: 'システム',
   profile_data: 'あなたのデータ',
-  profile_data_note:
-    'すべてこの端末の中にあります。アカウントもサーバーもありません。別の端末へ移すにはバックアップファイルを使うしかありません。',
+  profile_data_note: '目標はこの端末の中だけにあります。アカウントもクラウド上のコピーもありません。別の端末へ移すにはバックアップファイルを使うしかありません。',
   profile_export: 'バックアップを書き出す',
   profile_export_csv: 'CSVを書き出す',
   profile_import: 'バックアップを読み込む',
@@ -108,6 +107,11 @@ const STRINGS: LocaleStrings = {
   profile_built: 'ビルド {time}',
   profile_licenses: 'オープンソースライセンス',
   profile_licenses_failed: 'ライセンスの一覧を読み込めませんでした。',
+  metrics_title: '匿名の利用統計を共有',
+  metrics_note: '一日一回：使われた画面と機能、アプリのバージョン、プラットフォーム、言語。ID、タイトル、入力した内容は含みません。',
+  metrics_on: 'オン',
+  metrics_off: 'オフ',
+  metrics_notice: 'GoalsTableは一日一回、匿名の利用回数を送信します。IDや入力した内容は含みません。プロフィールでオフにできます。',
 
   toast_added: '{bucket}に追加しました',
   toast_moved: '{month}に追加しました',
@@ -131,8 +135,7 @@ const STRINGS: LocaleStrings = {
   status_open_source: 'オープンソース',
 
   support_title: '支援',
-  support_note:
-    'GoalsTableは無料で、広告もなく、何も収集しません。役に立っていれば、支援できます:',
+  support_note: 'GoalsTableは無料で、広告もありません。役に立っていれば、支援できます:',
 }
 
 export default STRINGS

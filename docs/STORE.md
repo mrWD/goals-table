@@ -65,8 +65,13 @@ Required before a build can go to *external* testers.
 
 > GoalsTable turns a year of goals into an app: what you plan for each month, what
 > you have ticked off, and the hour a day you sit down to do it. Seven years of my
-> own spreadsheet are in it as sample data. Everything stays on the device — no
-> account, no server, works offline.
+> own spreadsheet are in it as sample data. Your goals stay on the device — no
+> account, works offline. Once a day it sends anonymous usage counts (no IDs, nothing
+> you type); Profile turns that off.
+
+The version live in App Store Connect still ends "Everything stays on the device — no
+account, no server, works offline." Replace it with build 3, which is the first to send
+anything.
 
 **What to test**
 
@@ -76,6 +81,7 @@ Required before a build can go to *external* testers.
 > - Edit a month on the Plan screen — the focus list is picked from the year's goals.
 > - Switch language in Profile (20 of them; Arabic flips the layout right-to-left).
 > - Export a backup, delete something, import it back.
+> - Profile → Share anonymous usage statistics: switch it off and back on.
 
 **Feedback email:** lvigtor@gmail.com
 
@@ -83,10 +89,23 @@ Required before a build can go to *external* testers.
 
 ## Privacy answers
 
-- **Apple privacy label: Data Not Collected.** No accounts, no server for user
-  data, no analytics, no crash reporting of our own, no third-party SDKs that
-  collect anything.
-- The app makes no network requests at all in the native shell.
+From build 3, which carries the usage counters (`src/lib/metrics.ts`, added 2026-10-28):
+
+- **Apple privacy label: Data Collected**, two types, both **not linked to the
+  user** and **not used for tracking**, purpose **Analytics**:
+  - **Usage Data → Product Interaction** — counts of screens opened and features used;
+  - **Diagnostics → Other Diagnostic Data** — counts of errors by type (`TypeError`),
+    never the message.
+  Do not tick Crash Data (no crash logs or stack traces are sent), Identifiers, or
+  anything under Contact Info / User Content.
+- The native shell makes one network request: the daily ping to
+  `https://mrwd-metrics.vercel.app/api/ping` (app version, platform, language, local
+  date, install week, the counts). Switched off in Profile, it makes none.
+- Still no accounts, no server for user data, no third-party SDKs that collect
+  anything.
+
+Builds 1 and 2 sent nothing, and their answer was **Data Not Collected** — change the
+label in App Store Connect when build 3 goes up, not before.
 
 ## Done on 2026-08-29
 

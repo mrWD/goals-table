@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { categorize } from '../lib/categorize'
+import { count } from '../lib/metrics'
 import { successFeedback, tapFeedback } from '../lib/native-ui'
 import { buildSeedGoals } from '../lib/seed'
 import { deviceStorage } from '../lib/storage'
@@ -54,6 +55,7 @@ export const useGoals = create<GoalsState>()(
         if (!clean) return undefined
         // The id is minted outside `set` so it can be returned; `set` stays a pure update.
         const id = makeId()
+        count('goal_added')
         set((s) => ({
           goals: {
             ...s.goals,
@@ -76,8 +78,10 @@ export const useGoals = create<GoalsState>()(
           const goal = s.goals[id]
           if (!goal) return s
           const done = !goal.done
-          if (done) successFeedback()
-          else tapFeedback()
+          if (done) {
+            successFeedback()
+            count('goal_completed')
+          } else tapFeedback()
           return {
             goals: {
               ...s.goals,
@@ -109,7 +113,8 @@ export const useGoals = create<GoalsState>()(
       move: (id, bucket) =>
         set((s) => {
           const goal = s.goals[id]
-          if (!goal) return s
+          if (!goal || goal.bucket === bucket) return s
+          count('goal_moved')
           return { goals: { ...s.goals, [id]: { ...goal, bucket } } }
         }),
 

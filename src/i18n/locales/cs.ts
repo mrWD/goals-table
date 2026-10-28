@@ -103,7 +103,7 @@ const STRINGS: LocaleStrings = {
   lang_system: 'Systémový',
   profile_data: 'Vaše data',
   profile_data_note:
-    'Vše zůstává v tomto zařízení. Není zde účet ani server — soubor zálohy je jediná cesta, jak se data dostanou do jiného telefonu.',
+    'Vaše cíle jsou jen v tomto zařízení. Není zde účet ani kopie v cloudu — soubor zálohy je jediná cesta, jak se dostanou do jiného telefonu.',
   profile_export: 'Exportovat zálohu',
   profile_export_csv: 'Exportovat CSV',
   profile_import: 'Importovat zálohu',
@@ -113,6 +113,13 @@ const STRINGS: LocaleStrings = {
   profile_built: 'Sestaveno {time}',
   profile_licenses: 'Licence open source',
   profile_licenses_failed: 'Seznam licencí se nepodařilo načíst.',
+  metrics_title: 'Sdílet anonymní statistiky používání',
+  metrics_note:
+    'Jednou denně: které obrazovky a funkce byly použity, verze aplikace, platforma a jazyk. Žádná ID, názvy ani nic, co napíšete.',
+  metrics_on: 'Zapnuto',
+  metrics_off: 'Vypnuto',
+  metrics_notice:
+    'GoalsTable jednou denně odesílá anonymní počty používání — žádná ID, nic z toho, co napíšete. Vypnout to můžete v Profilu.',
 
   toast_added: 'Přidáno do {bucket}',
   toast_moved: 'Přidáno do {month}',
@@ -136,8 +143,7 @@ const STRINGS: LocaleStrings = {
   status_open_source: 'Otevřený kód',
 
   support_title: 'Podpora',
-  support_note:
-    'GoalsTable je zdarma, bez reklam a nic nesbírá. Pokud je vám užitečný, můžete ho podpořit:',
+  support_note: 'GoalsTable je zdarma a bez reklam. Pokud je vám užitečný, můžete ho podpořit:',
 }
 
 export default STRINGS

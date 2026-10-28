@@ -12,25 +12,43 @@
 </head>
 <body>
 <h1>GoalsTable — Privacy</h1>
-<p><em>Last updated: 2026-08-28</em></p>
+<p><em>Last updated: 2026-10-28</em></p>
 
 <p>GoalsTable is a personal tracker for yearly goals. The shortest honest summary:
-<strong>your goals never leave your device, and we could not read them if we wanted to.</strong></p>
+<strong>your goals never leave your device, and we could not read them if we wanted to.</strong>
+Once a day the app sends anonymous usage counts, described below, which you can switch off.</p>
 
 <h2>What we store</h2>
-<p>Nothing. There are no accounts, no sign-in, and no server that holds user data. Your
-goals live in your browser&rsquo;s storage (on the web) or in the app&rsquo;s own private
-storage (in the installed app). Deleting your browsing data or the app deletes them &mdash;
-which is why the app keeps offering you an export.</p>
+<p>None of your goals. There are no accounts, no sign-in, and no server that holds user
+data. Your goals live in your browser&rsquo;s storage (on the web) or in the app&rsquo;s own
+private storage (in the installed app). Deleting your browsing data or the app deletes them
+&mdash; which is why the app keeps offering you an export. All we keep are the anonymous
+totals described under &ldquo;Usage statistics&rdquo;.</p>
 
 <h2>What leaves your device</h2>
-<p>Nothing. GoalsTable has no backend of its own and queries no catalogue: everything it
-shows, it holds locally. The app works with the network switched off, and behaves the same
-way when it is on.</p>
+<p>Your goals never do. GoalsTable queries no catalogue: everything it shows, it holds
+locally, and it works with the network switched off. The one request it makes is the daily
+usage report below; with that switched off, it makes none at all.</p>
 
-<h2>Analytics</h2>
-<p>None, on the web and in the installed app alike. No page views, no events, no
-identifiers, no crash reporting.</p>
+<h2>Usage statistics</h2>
+<p>The app counts, on your device, which screens you open and which features you use
+(adding, completing and moving a goal, the daily blocks, adding a resource, exporting and
+importing a backup), and how many errors of each kind occurred &mdash; by type, such as
+&ldquo;TypeError&rdquo;, never the error message. Once a day, at the first launch of the
+day, it sends those counts to our server together with the app version, the platform (iOS,
+Android or web), the interface language, the date, the week the app was first used, and
+whether this is the first report ever, this week or this month.</p>
+<p>It sends no identifier of any kind &mdash; no device, user or advertising ID &mdash; and
+none of your goals, titles, notes or anything else you type. Your IP address is used only
+to deliver the request and to limit how often one address can send: it is held as a salted
+hash in memory for ten minutes and is never stored or logged by our code. The server adds
+each report into totals per app and per day, week and month; nothing is kept per device,
+and the totals are deleted after 400 days. The server runs on Vercel, which keeps its own
+short-lived request logs, and the totals are stored with Upstash.</p>
+<p>To turn it off: Profile &rarr; <em>Share anonymous usage statistics</em> &rarr; Off.
+Nothing more is sent, and the counts not yet sent are deleted. On the web, if your browser
+sends Global Privacy Control, it starts switched off. Nothing here is used for advertising
+or to track you across apps or websites.</p>
 
 <h2>Backups</h2>
 <p>An exported backup &mdash; JSON or CSV &mdash; is an ordinary file created at your

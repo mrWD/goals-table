@@ -19,9 +19,10 @@ Vite, zustand with `persist`, `HashRouter`, Capacitor 8 shells.
 ## Core principles (break only with the owner's explicit consent)
 
 1. **No backend for user data.** Goals live on the device: IndexedDB in a browser, a JSON
-   file in private app storage when running natively, localStorage for the theme only. No
-   accounts, no analytics, no data collection. There is no server code at all — unlike
-   FilmTable, this app has no API to proxy.
+   file in private app storage when running natively, localStorage for the theme, the
+   language and the usage counters. No accounts, and nothing the user writes ever leaves
+   the device. There is no server code here — unlike FilmTable, this app has no API to
+   proxy.
 2. **The seed is first-run only.** `src/lib/seed.ts` is written once into an empty store
    and never consulted again. It is guarded on a `seeded` flag rather than on the store
    being empty, so someone who deletes every goal gets an empty app, not the demo back.
@@ -34,6 +35,20 @@ Vite, zustand with `persist`, `HashRouter`, Capacitor 8 shells.
    right.
 4. **Its own visual identity.** Blue accent (`#2f5fe0`), distinct from FilmTable's purple.
    Six category colours that must stay distinguishable in both themes.
+5. **Anonymous usage counts — and only counts — once a day.** "No analytics" stopped being
+   true on 2026-10-28, with the owner's consent: he wants to know how many people use the
+   app, and how, before deciding anything about ads or tips. `src/lib/metrics.ts` follows
+   the contract in `../app-metrics/docs/CLIENT.md` (the server is that sibling repo) and
+   sends one ping a day: counts of fixed event names (`goal_added`, `goal_completed`,
+   `goal_moved`, `block_toggled`, `resource_added`, `backup_exported`, `csv_exported`,
+   `backup_imported`, `screen_today|year|plan|archive|profile`), uncaught errors by
+   `error.name`, the app version, platform, interface language, local date and the ISO
+   week of the first launch (`legacy` for installs that had goals of their own before).
+   No identifier of any kind, no titles, nothing typed, no error messages. On by default;
+   off in Profile, and on the web under Global Privacy Control; off deletes the unsent
+   counts. An event name is a fixed string in the code — never build one from user data.
+   Anything new that is sent must go into the privacy policy (here and on the products
+   page) first.
 
 ## How to run
 
@@ -63,6 +78,12 @@ a mandatory part of any noticeable change. Worth running:
 
 The iOS simulator and the Android emulator are worth a pass for anything touching storage
 or the status bar.
+
+For the usage ping: run `node scripts/dev-server.mjs` in `../app-metrics` (it prints every
+body it receives) and put `VITE_METRICS_URL=http://localhost:8787/api/ping` in
+`.env.development.local` (gitignored). Faking `lastDay`/`lastWeek`/`lastMonth` back in the
+`goalstable-metrics` localStorage key and reloading sends the next day's ping. An Android
+emulator reaches the Mac at `10.0.2.2`.
 
 ## Traps already hit
 
@@ -106,7 +127,7 @@ Rules that are easy to break:
 
 - **A new string means 20 files.** There is a parity check worth re-running after any
   addition — compare the top-level keys of each locale against `en.ts`; all 20 must match
-  exactly. They did at the time of writing (105 keys each).
+  exactly. They did on 2026-10-28 (121 keys each).
 - **Never build a sentence by concatenation.** Word order differs; use one key with
   `{placeholders}`.
 - **Plurals are `Intl.PluralRules` categories**, not `n === 1`. A locale supplies only the

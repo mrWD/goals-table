@@ -101,7 +101,7 @@ const STRINGS: LocaleStrings = {
   lang_system: 'Systeem',
   profile_data: 'Jouw gegevens',
   profile_data_note:
-    'Alles blijft op dit apparaat. Er is geen account en geen server — een back-upbestand is de enige weg naar een andere telefoon.',
+    'Je doelen staan alleen op dit apparaat. Er is geen account en geen kopie in de cloud — een back-upbestand is de enige weg naar een andere telefoon.',
   profile_export: 'Back-up exporteren',
   profile_export_csv: 'CSV exporteren',
   profile_import: 'Back-up importeren',
@@ -111,6 +111,13 @@ const STRINGS: LocaleStrings = {
   profile_built: 'Gebouwd {time}',
   profile_licenses: 'Opensourcelicenties',
   profile_licenses_failed: 'De lijst met licenties kon niet worden geladen.',
+  metrics_title: 'Anonieme gebruiksstatistieken delen',
+  metrics_note:
+    'Eén keer per dag: welke schermen en functies zijn gebruikt, app-versie, platform en taal. Geen ID’s, titels of iets wat je typt.',
+  metrics_on: 'Aan',
+  metrics_off: 'Uit',
+  metrics_notice:
+    'GoalsTable stuurt één keer per dag anonieme gebruikstellingen — geen ID’s, niets wat je typt. Je kunt dit uitzetten in Profiel.',
 
   toast_added: 'Toegevoegd aan {bucket}',
   toast_moved: 'Toegevoegd aan {month}',
@@ -135,7 +142,7 @@ const STRINGS: LocaleStrings = {
 
   support_title: 'Steunen',
   support_note:
-    'GoalsTable is gratis, heeft geen advertenties en verzamelt niets. Als het nuttig voor je is, kun je het steunen:',
+    'GoalsTable is gratis en heeft geen advertenties. Als het nuttig voor je is, kun je het steunen:',
 }
 
 export default STRINGS

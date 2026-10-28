@@ -97,8 +97,7 @@ const STRINGS: LocaleStrings = {
   profile_language: '언어',
   lang_system: '시스템',
   profile_data: '내 데이터',
-  profile_data_note:
-    '모든 것이 이 기기에 있습니다. 계정도 서버도 없으므로, 다른 기기로 옮기는 방법은 백업 파일뿐입니다.',
+  profile_data_note: '목표는 이 기기에만 있습니다. 계정도 클라우드 사본도 없으므로, 다른 기기로 옮기는 방법은 백업 파일뿐입니다.',
   profile_export: '백업 내보내기',
   profile_export_csv: 'CSV 내보내기',
   profile_import: '백업 가져오기',
@@ -108,6 +107,11 @@ const STRINGS: LocaleStrings = {
   profile_built: '빌드 {time}',
   profile_licenses: '오픈 소스 라이선스',
   profile_licenses_failed: '라이선스 목록을 불러오지 못했습니다.',
+  metrics_title: '익명 사용 통계 공유',
+  metrics_note: '하루 한 번: 사용한 화면과 기능, 앱 버전, 플랫폼, 언어. ID, 제목, 입력한 내용은 포함되지 않습니다.',
+  metrics_on: '켜짐',
+  metrics_off: '꺼짐',
+  metrics_notice: 'GoalsTable은 하루 한 번 익명 사용 횟수를 보냅니다. ID나 입력한 내용은 포함되지 않습니다. 프로필에서 끌 수 있습니다.',
 
   toast_added: '{bucket}에 추가했습니다',
   toast_moved: '{month}에 추가했습니다',
@@ -131,8 +135,7 @@ const STRINGS: LocaleStrings = {
   status_open_source: '오픈 소스',
 
   support_title: '후원',
-  support_note:
-    'GoalsTable은 무료이고 광고가 없으며 아무것도 수집하지 않습니다. 도움이 되었다면 후원할 수 있습니다:',
+  support_note: 'GoalsTable은 무료이고 광고가 없습니다. 도움이 되었다면 후원할 수 있습니다:',
 }
 
 export default STRINGS

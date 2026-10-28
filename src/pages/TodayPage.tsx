@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AddTodayFab } from '../components/AddToday'
 import { FlameIcon } from '../components/Icons'
+import { MetricsNotice } from '../components/MetricsNotice'
 import { Checkbox, EmptyState } from '../components/ui'
 import { dayHeading, monthName } from '../lib/format'
 import { blocksDone, currentStreak, dayKey, fromDayKey, recentDays, usePlan } from '../store/plan'
@@ -59,6 +60,8 @@ export default function TodayPage() {
         <p className="eyebrow">{dayHeading(today, locale)}</p>
         <h1>{t('today_title')}</h1>
       </header>
+
+      <MetricsNotice />
 
       <section className="card streak-card">
         <div className="streak-top">

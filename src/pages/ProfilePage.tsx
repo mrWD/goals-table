@@ -6,6 +6,7 @@ import { UI_LANGS, type LangCode } from '../i18n'
 import { applyBackup, exportBackup, exportCsv, isValidBackup } from '../lib/backup'
 import { number } from '../lib/format'
 import { donationsHidden } from '../lib/from-app'
+import { count, setMetricsEnabled, useMetrics } from '../lib/metrics'
 import { isYear } from '../lib/types'
 import { statsFor, useGoals } from '../store/goals'
 import { useLang, useLocale, useT, type LangChoice } from '../store/lang'
@@ -20,6 +21,7 @@ export default function ProfilePage() {
   const { resources, addResource, removeResource, log } = usePlan()
   const { theme, setTheme } = useTheme()
   const { choice: langChoice, setLang } = useLang()
+  const { enabled: sharing } = useMetrics()
   const showToast = useUi((s) => s.showToast)
   const askConfirm = useUi((s) => s.askConfirm)
   const fileRef = useRef<HTMLInputElement>(null)
@@ -41,6 +43,7 @@ export default function ProfilePage() {
     // 'cancelled' is the person closing the share sheet — saying anything would be noise.
     if (outcome === 'failed') showToast(t('toast_export_failed'))
     else if (outcome === 'downloaded') showToast(t('toast_saved_downloads'))
+    if (outcome !== 'failed' && outcome !== 'cancelled') count(kind === 'json' ? 'backup_exported' : 'csv_exported')
   }
 
   const onImport = async (file: File) => {
@@ -56,6 +59,7 @@ export default function ProfilePage() {
       })
       if (!ok) return
       applyBackup(data)
+      count('backup_imported')
       showToast(t('toast_restored'))
     } catch {
       showToast(t('toast_unreadable'))
@@ -153,6 +157,24 @@ export default function ProfilePage() {
             if (file) void onImport(file)
           }}
         />
+      </section>
+
+      <section className="card">
+        <h2 className="card-head">{t('metrics_title')}</h2>
+        <p className="card-note">{t('metrics_note')}</p>
+        <div className="chips" role="group" aria-label={t('metrics_title')}>
+          {[true, false].map((on) => (
+            <button
+              key={String(on)}
+              type="button"
+              aria-pressed={sharing === on}
+              className={`chip${sharing === on ? ' is-active' : ''}`}
+              onClick={() => setMetricsEnabled(on)}
+            >
+              {t(on ? 'metrics_on' : 'metrics_off')}
+            </button>
+          ))}
+        </div>
       </section>
 
       <section className="card">

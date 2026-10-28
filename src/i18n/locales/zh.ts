@@ -96,8 +96,7 @@ const STRINGS: LocaleStrings = {
   profile_language: '语言',
   lang_system: '跟随系统',
   profile_data: '你的数据',
-  profile_data_note:
-    '一切都保存在这台设备上。没有账号，也没有服务器——备份文件是数据到达另一部手机的唯一方式。',
+  profile_data_note: '你的目标只保存在这台设备上。没有账号，也没有云端副本——备份文件是把它们转到另一部手机的唯一方式。',
   profile_export: '导出备份',
   profile_export_csv: '导出 CSV',
   profile_import: '导入备份',
@@ -107,6 +106,11 @@ const STRINGS: LocaleStrings = {
   profile_built: '构建于 {time}',
   profile_licenses: '开源许可',
   profile_licenses_failed: '无法加载许可列表。',
+  metrics_title: '分享匿名使用统计',
+  metrics_note: '每天一次：用过哪些页面和功能、应用版本、平台和语言。不含任何 ID、标题或你输入的内容。',
+  metrics_on: '开启',
+  metrics_off: '关闭',
+  metrics_notice: 'GoalsTable 每天发送一次匿名使用计数——不含 ID，也不含你输入的任何内容。可以在“我的”中关闭。',
 
   toast_added: '已添加到{bucket}',
   toast_moved: '已添加到{month}',
@@ -130,7 +134,7 @@ const STRINGS: LocaleStrings = {
   status_open_source: '开源',
 
   support_title: '支持',
-  support_note: 'GoalsTable 免费、无广告，也不收集任何数据。如果它对你有用，可以支持一下：',
+  support_note: 'GoalsTable 免费、无广告。如果它对你有用，可以支持一下：',
 }
 
 export default STRINGS

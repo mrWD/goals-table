@@ -6,8 +6,10 @@ Product page: https://mrwd.github.io/products/goals-table/ · iOS beta: https://
 
 A yearly goals tracker, built from a Google Sheet that had been kept since 2020.
 
-One codebase runs on the web, on desktop, on Android and on iPhone. Everything lives on
-the device: no account, no server, no analytics.
+One codebase runs on the web, on desktop, on Android and on iPhone. Your goals live on
+the device: no account, no server for your data. Once a day the app sends anonymous usage
+counts — which screens and features were used, the app version, platform and language; no
+IDs, titles or anything typed — and Profile turns that off.
 
 The fourth of the local-first trackers, after [FilmTable](https://github.com/mrWD/film-table),
 [GamesTable](https://github.com/mrWD/games-table) and [BooksTable](https://github.com/mrWD/books-table),

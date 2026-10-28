@@ -1495,3 +1495,32 @@ textarea {
     transition: none !important;
   }
 }
+
+/* ---------- usage statistics notice ----------
+ *
+ * Quiet on purpose: a line of small print on the card colour, never a dialog. It sits in the
+ * page's own flow, so it pushes the day down rather than covering the floating button.
+ */
+
+.metrics-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-block: 10px;
+  padding-inline: 14px 12px;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+.metrics-notice p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+.metrics-notice .btn {
+  flex: none;
+}

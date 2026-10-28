@@ -111,7 +111,7 @@ export const STRINGS = {
   lang_system: 'System',
   profile_data: 'Your data',
   profile_data_note:
-    'Everything lives on this device. There is no account and no server — so a backup file is the only way it reaches another phone.',
+    'Your goals live only on this device. There is no account and no cloud copy — so a backup file is the only way they reach another phone.',
   profile_export: 'Export backup',
   profile_export_csv: 'Export CSV',
   profile_import: 'Import backup',
@@ -121,6 +121,13 @@ export const STRINGS = {
   profile_built: 'Built {time}',
   profile_licenses: 'Open-source licences',
   profile_licenses_failed: 'The list of licences could not be loaded.',
+  metrics_title: 'Share anonymous usage statistics',
+  metrics_note:
+    'Once a day: which screens and features were used, app version, platform and language. No IDs, titles or anything you type.',
+  metrics_on: 'On',
+  metrics_off: 'Off',
+  metrics_notice:
+    'GoalsTable sends anonymous usage counts once a day — no IDs, nothing you type. You can turn this off in Profile.',
 
   toast_added: 'Added to {bucket}',
   toast_moved: 'Added to {month}',
@@ -144,8 +151,7 @@ export const STRINGS = {
   status_open_source: 'Open source',
 
   support_title: 'Support',
-  support_note:
-    'GoalsTable is free, has no ads and collects nothing. If it is useful to you, you can support it:',
+  support_note: 'GoalsTable is free and has no ads. If it is useful to you, you can support it:',
 }
 
 export default STRINGS
