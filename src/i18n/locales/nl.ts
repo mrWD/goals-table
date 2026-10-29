@@ -113,7 +113,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses_failed: 'De lijst met licenties kon niet worden geladen.',
   metrics_title: 'Anonieme gebruiksstatistieken delen',
   metrics_note:
-    'Eén keer per dag: welke schermen en functies zijn gebruikt, app-versie, platform en taal. Geen ID’s, titels of iets wat je typt.',
+    'Eén keer per dag: welke schermen en functies zijn gebruikt, app-versie, platform, taal en aantallen fouten. Geen ID’s, titels of iets wat je typt.',
   metrics_on: 'Aan',
   metrics_off: 'Uit',
   metrics_notice:

@@ -113,7 +113,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses_failed: 'Die Liste der Lizenzen konnte nicht geladen werden.',
   metrics_title: 'Anonyme Nutzungsstatistik teilen',
   metrics_note:
-    'Einmal am Tag: welche Bildschirme und Funktionen genutzt wurden, App-Version, Plattform und Sprache. Keine IDs, keine Titel, nichts, was du eintippst.',
+    'Einmal am Tag: welche Bildschirme und Funktionen genutzt wurden, App-Version, Plattform, Sprache und Fehlerzahlen. Keine IDs, keine Titel, nichts, was du eintippst.',
   metrics_on: 'An',
   metrics_off: 'Aus',
   metrics_notice:

@@ -123,7 +123,7 @@ export const STRINGS = {
   profile_licenses_failed: 'The list of licences could not be loaded.',
   metrics_title: 'Share anonymous usage statistics',
   metrics_note:
-    'Once a day: which screens and features were used, app version, platform and language. No IDs, titles or anything you type.',
+    'Once a day: which screens and features were used, app version, platform, language and error counts. No IDs, titles or anything you type.',
   metrics_on: 'On',
   metrics_off: 'Off',
   metrics_notice:

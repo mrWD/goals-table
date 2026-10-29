@@ -110,7 +110,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses_failed: 'Daftar lisensi tidak dapat dimuat.',
   metrics_title: 'Bagikan statistik penggunaan anonim',
   metrics_note:
-    'Sekali sehari: layar dan fitur mana yang dipakai, versi aplikasi, platform, dan bahasa. Tanpa ID, judul, atau apa pun yang kamu ketik.',
+    'Sekali sehari: layar dan fitur mana yang dipakai, versi aplikasi, platform, bahasa, dan jumlah kesalahan. Tanpa ID, judul, atau apa pun yang kamu ketik.',
   metrics_on: 'Aktif',
   metrics_off: 'Nonaktif',
   metrics_notice:

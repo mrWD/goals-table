@@ -115,7 +115,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses_failed: 'Seznam licencí se nepodařilo načíst.',
   metrics_title: 'Sdílet anonymní statistiky používání',
   metrics_note:
-    'Jednou denně: které obrazovky a funkce byly použity, verze aplikace, platforma a jazyk. Žádná ID, názvy ani nic, co napíšete.',
+    'Jednou denně: které obrazovky a funkce byly použity, verze aplikace, platforma, jazyk a počty chyb. Žádná ID, názvy ani nic, co napíšete.',
   metrics_on: 'Zapnuto',
   metrics_off: 'Vypnuto',
   metrics_notice:

@@ -108,7 +108,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses: 'オープンソースライセンス',
   profile_licenses_failed: 'ライセンスの一覧を読み込めませんでした。',
   metrics_title: '匿名の利用統計を共有',
-  metrics_note: '一日一回：使われた画面と機能、アプリのバージョン、プラットフォーム、言語。ID、タイトル、入力した内容は含みません。',
+  metrics_note: '一日一回：使われた画面と機能、アプリのバージョン、プラットフォーム、言語、エラーの件数。ID、タイトル、入力した内容は含みません。',
   metrics_on: 'オン',
   metrics_off: 'オフ',
   metrics_notice: 'GoalsTableは一日一回、匿名の利用回数を送信します。IDや入力した内容は含みません。プロフィールでオフにできます。',

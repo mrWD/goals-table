@@ -108,7 +108,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses: '오픈 소스 라이선스',
   profile_licenses_failed: '라이선스 목록을 불러오지 못했습니다.',
   metrics_title: '익명 사용 통계 공유',
-  metrics_note: '하루 한 번: 사용한 화면과 기능, 앱 버전, 플랫폼, 언어. ID, 제목, 입력한 내용은 포함되지 않습니다.',
+  metrics_note: '하루 한 번: 사용한 화면과 기능, 앱 버전, 플랫폼, 언어, 오류 횟수. ID, 제목, 입력한 내용은 포함되지 않습니다.',
   metrics_on: '켜짐',
   metrics_off: '꺼짐',
   metrics_notice: 'GoalsTable은 하루 한 번 익명 사용 횟수를 보냅니다. ID나 입력한 내용은 포함되지 않습니다. 프로필에서 끌 수 있습니다.',

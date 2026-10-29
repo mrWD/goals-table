@@ -113,7 +113,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses_failed: 'Impossible de charger la liste des licences.',
   metrics_title: "Partager des statistiques d'utilisation anonymes",
   metrics_note:
-    "Une fois par jour : les écrans et fonctions utilisés, la version de l'app, la plateforme et la langue. Aucun identifiant, aucun titre, rien de ce que vous tapez.",
+    "Une fois par jour : les écrans et fonctions utilisés, la version de l'app, la plateforme, la langue et le nombre d’erreurs. Aucun identifiant, aucun titre, rien de ce que vous tapez.",
   metrics_on: 'Activé',
   metrics_off: 'Désactivé',
   metrics_notice:

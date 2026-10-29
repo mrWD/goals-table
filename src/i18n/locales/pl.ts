@@ -115,7 +115,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses_failed: 'Nie udało się wczytać listy licencji.',
   metrics_title: 'Udostępniaj anonimowe statystyki użycia',
   metrics_note:
-    'Raz dziennie: które ekrany i funkcje były używane, wersja aplikacji, platforma i język. Bez identyfikatorów, tytułów i niczego, co wpisujesz.',
+    'Raz dziennie: które ekrany i funkcje były używane, wersja aplikacji, platforma, język i liczba błędów. Bez identyfikatorów, tytułów i niczego, co wpisujesz.',
   metrics_on: 'Włączone',
   metrics_off: 'Wyłączone',
   metrics_notice:

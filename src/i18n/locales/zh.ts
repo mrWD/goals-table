@@ -107,7 +107,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses: '开源许可',
   profile_licenses_failed: '无法加载许可列表。',
   metrics_title: '分享匿名使用统计',
-  metrics_note: '每天一次：用过哪些页面和功能、应用版本、平台和语言。不含任何 ID、标题或你输入的内容。',
+  metrics_note: '每天一次：用过哪些页面和功能、应用版本、平台、语言和错误次数。不含任何 ID、标题或你输入的内容。',
   metrics_on: '开启',
   metrics_off: '关闭',
   metrics_notice: 'GoalsTable 每天发送一次匿名使用计数——不含 ID，也不含你输入的任何内容。可以在“我的”中关闭。',

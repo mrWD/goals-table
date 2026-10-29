@@ -110,7 +110,7 @@ const STRINGS: LocaleStrings = {
   profile_licenses_failed: 'Lisans listesi yüklenemedi.',
   metrics_title: 'Anonim kullanım istatistiklerini paylaş',
   metrics_note:
-    'Günde bir kez: hangi ekranların ve özelliklerin kullanıldığı, uygulama sürümü, platform ve dil. Kimlik, başlık ya da yazdığın hiçbir şey yok.',
+    'Günde bir kez: hangi ekranların ve özelliklerin kullanıldığı, uygulama sürümü, platform, dil ve hata sayıları. Kimlik, başlık ya da yazdığın hiçbir şey yok.',
   metrics_on: 'Açık',
   metrics_off: 'Kapalı',
   metrics_notice:
