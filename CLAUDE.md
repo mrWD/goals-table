@@ -62,6 +62,10 @@ npm run build:native
 ```
 
 `node scripts/gen-icons.mjs` regenerates the PNG icons from `public/favicon.svg`.
+`node scripts/site-screenshots.mjs` re-shoots the products page's ten screenshots
+(`docs/store/site/`, 414×896, light and dark) from the demo seed in a fresh profile — copy
+them to `products-page/products/goals-table/assets/` and check the alt text still matches.
+It needs Playwright (`npm i --no-save playwright`, or `PLAYWRIGHT=<path>` to one on disk).
 
 ## How to verify
 
