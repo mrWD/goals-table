@@ -3,6 +3,30 @@
 Everything App Store Connect asks for, prepared once. Same shape as the sibling
 trackers' `docs/STORE.md`.
 
+## Store listing (App Store and Google Play)
+
+The public listing is not in this file. It lives in `docs/store/`, in the format of
+`../store-release/SCHEMA.md`, and that is what gets pushed and reviewed:
+
+- `docs/store/app-store.json`: name, subtitle, promotional text, description, keywords,
+  URLs, category (Productivity, secondary Lifestyle), content rights (no third-party
+  content), age rating (the 4+ defaults, no overrides), review notes and the App Privacy
+  answers below;
+- `docs/store/google-play.json`: title, short and full description, category, contact,
+  financial features (none), Data safety and the expected content rating (Everyone);
+- `docs/store/screenshots/`: iPhone 6.9" and Android, six each, and iPad 13", five,
+  made by `node scripts/store-screenshots.mjs` from the fictional demo seed, which also
+  draws `docs/store/feature-graphic-1024x500.png`. The status bars come from
+  `docs/store/frame/`.
+
+`node ../store-release/asc-release.mjs . --check` validates the App Store half. The App
+Privacy label and Play's Data safety are not in either API: the owner enters them by
+hand from the `appPrivacy` and `dataSafety` blocks.
+
+Android release builds sign with the shared upload key when the four `MRWD_UPLOAD_*`
+properties are in `~/.gradle/gradle.properties`, and build unsigned with a warning
+otherwise (`android/app/build.gradle`). `versionCode` is 2; raise it for every upload.
+
 ## Identity
 
 | | |
@@ -64,14 +88,15 @@ Required before a build can go to *external* testers.
 **Beta app description**
 
 > GoalsTable turns a year of goals into an app: what you plan for each month, what
-> you have ticked off, and the hour a day you sit down to do it. Seven years of my
-> own spreadsheet are in it as sample data. Your goals stay on the device — no
-> account, works offline. Once a day it sends anonymous usage counts (no IDs, nothing
-> you type); Profile turns that off.
+> you have ticked off, and the hour a day you sit down to do it. It comes with seven
+> years of made-up sample goals, so every screen has something on it from the start.
+> Your goals stay on the device, with no account, and it works offline. The app sends
+> anonymous usage counts once a day (no IDs, nothing you type), which you can turn off
+> in Profile.
 
-The version live in App Store Connect still ends "Everything stays on the device — no
-account, no server, works offline." Replace it with build 3, which is the first to send
-anything.
+This is the text live in App Store Connect, read back through the API on 2026-10-30.
+Until build 3 this draft said "Seven years of my own spreadsheet are in it as sample
+data", which stopped being true when the seed became fictional on 2026-10-18.
 
 **What to test**
 

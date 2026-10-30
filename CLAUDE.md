@@ -66,6 +66,10 @@ npm run build:native
 (`docs/store/site/`, 414×896, light and dark) from the demo seed in a fresh profile — copy
 them to `products-page/products/goals-table/assets/` and check the alt text still matches.
 It needs Playwright (`npm i --no-save playwright`, or `PLAYWRIGHT=<path>` to one on disk).
+`node scripts/store-screenshots.mjs` makes the store images the same way: iPhone 6.9",
+iPad 13" and Android screenshots in `docs/store/screenshots/`, and Play's feature graphic.
+The listing texts beside them are `docs/store/app-store.json` and `google-play.json`, in
+the format of `../store-release/SCHEMA.md`; `docs/STORE.md` points at them.
 
 ## How to verify
 

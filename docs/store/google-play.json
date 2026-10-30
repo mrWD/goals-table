@@ -1,0 +1,22 @@
+{
+  "packageName": "com.mrwd.goalstable",
+  "defaultLanguage": "en-US",
+  "title": "GoalsTable",
+  "shortDescription": "Yearly goals, a monthly focus and a daily routine. No account, works offline.",
+  "fullDescription": "GoalsTable keeps a year of goals in one place: what you want to get done this year, what you focus on each month, and the hours a day you actually sit down to do it.\n\nIt started as a spreadsheet of yearly plans that I kept for years, and became an app so it fits on a phone.\n\nThe year\n• Goals sorted into six categories: Tech, Languages, Money, Health, Life and Projects\n• A ring for how much of the year is done, and a bar for each category\n• Search the year, or show only what is still open or already done\n\nToday\n• Three one-hour blocks a day to tick off as you do them\n• A streak of the days you closed all three\n• This month's focus, and the goals still open from it\n\nPlan\n• Twelve months, each with a short focus list picked from the year's goals\n• A language and a money line for each month, if you want them\n\nYears\n• Every past year with how much of it got done\n• A backlog for someday ideas, and a way to move an old goal into this year\n\nYour data\n• Your goals stay on your device. No account, no sign-up, and it works offline\n• Export a backup file or a CSV whenever you like, and import the backup on another phone\n\nThe app opens with fictional sample goals, so you can see what a lived-in year looks like. Delete them or start adding your own right away.\n\n20 languages, light and dark themes.\n\nPrivacy\nOnce a day the app sends anonymous usage counts: which screens and features were used, the app version, platform, language and error counts. No IDs, no goal titles and nothing you type. You can turn it off in Profile, and turning it off deletes the counts that were not sent yet. The privacy policy lists exactly what is sent.\n\nFree, no ads.",
+  "category": "PRODUCTIVITY",
+  "contactEmail": "lvigtor@gmail.com",
+  "website": "https://mrwd.github.io/products/goals-table/",
+  "privacyPolicyUrl": "https://mrwd.github.io/products/goals-table/privacy/",
+  "containsAds": false,
+  "financialFeatures": "none",
+  "dataSafety": {
+    "collected": [
+      { "category": "App activity › App interactions", "shared": false, "optional": true, "purposes": ["Analytics"] },
+      { "category": "App info and performance › Diagnostics", "shared": false, "optional": true, "purposes": ["Analytics"] }
+    ],
+    "encryptedInTransit": true,
+    "deletionRequest": "Nothing is linked to a user, so there is nothing to delete on request. Turning the switch off in Profile deletes the unsent counts on the device."
+  },
+  "contentRating": "Everyone"
+}
