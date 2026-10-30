@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+def uploadKeyProperties = ['MRWD_UPLOAD_STORE_FILE', 'MRWD_UPLOAD_STORE_PASSWORD', 'MRWD_UPLOAD_KEY_ALIAS', 'MRWD_UPLOAD_KEY_PASSWORD']
+def missingUploadKey = uploadKeyProperties.findAll { !findProperty(it) }
+def hasUploadKey = missingUploadKey.isEmpty()
+
 android {
     namespace = "com.mrwd.goalstable"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -7,7 +11,7 @@ android {
         applicationId "com.mrwd.goalstable"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
@@ -16,11 +20,32 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    // The upload key, one for all of mrWD's apps (../store-release/SCHEMA.md). Its four
+    // properties live in ~/.gradle/gradle.properties on the owner's Mac and never in this
+    // repository. Without them a release is built unsigned, so the project still builds
+    // anywhere; Play refuses an unsigned bundle, which is the point of the warning below.
+    signingConfigs {
+        if (hasUploadKey) {
+            release {
+                storeFile file(findProperty('MRWD_UPLOAD_STORE_FILE'))
+                storePassword findProperty('MRWD_UPLOAD_STORE_PASSWORD')
+                keyAlias findProperty('MRWD_UPLOAD_KEY_ALIAS')
+                keyPassword findProperty('MRWD_UPLOAD_KEY_PASSWORD')
+            }
+        }
+    }
     buildTypes {
         release {
+            if (hasUploadKey) signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+gradle.taskGraph.whenReady { graph ->
+    if (!hasUploadKey && graph.allTasks.any { it.project == project && it.name.contains('Release') }) {
+        logger.warn("WARNING: release build is UNSIGNED: ${missingUploadKey.join(', ')} not set in ~/.gradle/gradle.properties. Google Play will not accept it.")
     }
 }
 
